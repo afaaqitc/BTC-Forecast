@@ -146,13 +146,13 @@ ggplotly( detect_last_chart,width = 900)
 detect_last_gt
 ```
 
-### Next 13 Months
+### Next Year Chart
 ```{r}
 ggplotly( mn_add_chart,width = 900)
 ```
 
  
-### Next 13 Chart
+### Next Year TBL
 ```{r}
 mn_add_gt
 ```
