@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="JDRK" />
+
+<meta name="date" content="2024-08-09" />
+
+<title>BTC-Forecast</title>
+
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">BTC-Forecast</h1>
+<h4 class="author">JDRK</h4>
+<h4 class="date">2024-08-09</h4>
+
+</div>
+
+
+<div id="section" class="section level2 tabset">
+<h2 class="tabset"></h2>
+<div id="last_year" class="section level3">
+<h3>Last_Year</h3>
+<div id="htmlwidget-0ad4956ed81c2627856f" style="width:900px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0ad4956ed81c2627856f">{"x":{"data":[{"x":[1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400],"y":[35829.719495362944,39502.429459505111,42312.218250793449,44606.479556277773,46571.692481163147,48311.868766163883,49888.376616727401,51339.756851809136,52691.682799071728,53962.150944901718,55164.320573446574,56308.15049410137,57401.391358276567],"text":["mn: 2023-08-01<br />price: 35829.72<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-09-01<br />price: 39502.43<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-10-01<br />price: 42312.22<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-11-01<br />price: 44606.48<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-12-01<br />price: 46571.69<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-01-01<br />price: 48311.87<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-02-01<br />price: 49888.38<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-03-01<br />price: 51339.76<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-04-01<br />price: 52691.68<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-05-01<br />price: 53962.15<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-06-01<br />price: 55164.32<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-07-01<br />price: 56308.15<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-08-01<br />price: 57401.39<br />cat: Hi.80<br />cat: Hi.80"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"Hi.80","legendgroup":"Hi.80","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400],"y":[38398.482036257847,43812.774289448767,48039.569713074328,51523.876816807009,54520.910924074618,57179.327631226595,59589.362203783356,61808.700194129407,63876.168629516709,65819.138944324208,67657.683777645609,69407.015486145305,71078.981300114363],"text":["mn: 2023-08-01<br />price: 38398.48<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-09-01<br />price: 43812.77<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-10-01<br />price: 48039.57<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-11-01<br />price: 51523.88<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-12-01<br />price: 54520.91<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-01-01<br />price: 57179.33<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-02-01<br />price: 59589.36<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-03-01<br />price: 61808.70<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-04-01<br />price: 63876.17<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-05-01<br />price: 65819.14<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-06-01<br />price: 67657.68<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-07-01<br />price: 69407.02<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-08-01<br />price: 71078.98<br />cat: Hi.95<br />cat: Hi.95"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(0,186,56,1)","dash":"solid"},"hoveron":"points","name":"Hi.95","legendgroup":"Hi.95","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400],"y":[29422.703061995966,26139.632682291667,27095.848034274193,34063.673632812497,39809.141255040326,43573.327620967742,43895.77239583333,61130.861718749999,67822.904817708331,63098.320690524197,68511.816666666666,61242.208039314515,63716.274576822914],"text":["mn: 2023-08-01<br />price: 29422.70<br />cat: price<br />cat: price","mn: 2023-09-01<br />price: 26139.63<br />cat: price<br />cat: price","mn: 2023-10-01<br />price: 27095.85<br />cat: price<br />cat: price","mn: 2023-11-01<br />price: 34063.67<br />cat: price<br />cat: price","mn: 2023-12-01<br />price: 39809.14<br />cat: price<br />cat: price","mn: 2024-01-01<br />price: 43573.33<br />cat: price<br />cat: price","mn: 2024-02-01<br />price: 43895.77<br />cat: price<br />cat: price","mn: 2024-03-01<br />price: 61130.86<br />cat: price<br />cat: price","mn: 2024-04-01<br />price: 67822.90<br />cat: price<br />cat: price","mn: 2024-05-01<br />price: 63098.32<br />cat: price<br />cat: price","mn: 2024-06-01<br />price: 68511.82<br />cat: price<br />cat: price","mn: 2024-07-01<br />price: 61242.21<br />cat: price<br />cat: price","mn: 2024-08-01<br />price: 63716.27<br />cat: price<br />cat: price"],"type":"scatter","mode":"lines","line":{"width":1.8897637795275593,"color":"rgba(97,156,255,1)","dash":"solid"},"hoveron":"points","name":"price","legendgroup":"price","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.38356164383562,"r":7.3059360730593621,"b":63.636363636363626,"l":44.167704441677039},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Forecast BTC For 13 Momths Next.","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1689266880,1724051520],"tickmode":"array","ticktext":["Aug-2023","Sep-2023","Oct-2023","Nov-2023","Dec-2023","Jan-2024","Feb-2024","Mar-2024","Apr-2024","May-2024","Jun-2024","Jul-2024","Aug-2024"],"tickvals":[1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400],"categoryorder":"array","categoryarray":["Aug-2023","Sep-2023","Oct-2023","Nov-2023","Dec-2023","Jan-2024","Feb-2024","Mar-2024","Apr-2024","May-2024","Jun-2024","Jul-2024","Aug-2024"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835198},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[23892.665251400533,73325.948731005497],"tickmode":"array","ticktext":["25000","35000","45000","55000","65000"],"tickvals":[25000,35000,45000,55000,65000],"categoryorder":"array","categoryarray":["25000","35000","45000","55000","65000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835198},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176002,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"cat","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","width":900,"barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"271a522bc84eb":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"271a522bc84eb","visdat":{"271a522bc84eb":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="last_year_tbl" class="section level3">
+<h3>Last_Year_TBL</h3>
+<div id="rkkealshst" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rkkealshst table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rkkealshst thead, #rkkealshst tbody, #rkkealshst tfoot, #rkkealshst tr, #rkkealshst td, #rkkealshst th {
+  border-style: none;
+}
+
+#rkkealshst p {
+  margin: 0;
+  padding: 0;
+}
+
+#rkkealshst .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rkkealshst .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rkkealshst .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rkkealshst .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rkkealshst .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rkkealshst .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+}
+
+#rkkealshst .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rkkealshst .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #004D80;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rkkealshst .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #004D80;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rkkealshst .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rkkealshst .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rkkealshst .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rkkealshst .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rkkealshst .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rkkealshst .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  vertical-align: middle;
+}
+
+#rkkealshst .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rkkealshst .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rkkealshst .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: dashed;
+  border-top-width: 1px;
+  border-top-color: #929292;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #929292;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #929292;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rkkealshst .gt_stub {
+  color: #333333;
+  background-color: #D5D5D5;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rkkealshst .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rkkealshst .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rkkealshst .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rkkealshst .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rkkealshst .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #929292;
+}
+
+#rkkealshst .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rkkealshst .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+}
+
+#rkkealshst .gt_grand_summary_row {
+  color: #333333;
+  background-color: #D5D5D5;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rkkealshst .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #929292;
+}
+
+#rkkealshst .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #929292;
+}
+
+#rkkealshst .gt_striped {
+  background-color: #F4F4F4;
+}
+
+#rkkealshst .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+}
+
+#rkkealshst .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rkkealshst .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rkkealshst .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rkkealshst .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rkkealshst .gt_left {
+  text-align: left;
+}
+
+#rkkealshst .gt_center {
+  text-align: center;
+}
+
+#rkkealshst .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rkkealshst .gt_font_normal {
+  font-weight: normal;
+}
+
+#rkkealshst .gt_font_bold {
+  font-weight: bold;
+}
+
+#rkkealshst .gt_font_italic {
+  font-style: italic;
+}
+
+#rkkealshst .gt_super {
+  font-size: 65%;
+}
+
+#rkkealshst .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rkkealshst .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rkkealshst .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rkkealshst .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rkkealshst .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rkkealshst .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rkkealshst .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rkkealshst .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rkkealshst div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="MN">MN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="PRICE">PRICE</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="HI.80">HI.80</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="HI.95">HI.95</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="DETECT_LAST">DETECT_LAST</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr class="gt_group_heading_row">
+      <th colspan="5" class="gt_group_heading" style="background-color: #BEBEBE; font-weight: bold;" scope="colgroup" id="2023">2023</th>
+    </tr>
+    <tr class="gt_row_group_first"><td headers="2023  mn" class="gt_row gt_center" style="color: #000000;">2023-08-01</td>
+<td headers="2023  price" class="gt_row gt_center" style="color: #000000;">29,422.70</td>
+<td headers="2023  Hi.80" class="gt_row gt_center" style="color: #000000;">35,829.72</td>
+<td headers="2023  Hi.95" class="gt_row gt_center" style="color: #000000;">38,398.48</td>
+<td headers="2023  detect_last" class="gt_row gt_center" style="color: #000000;">30.51%</td></tr>
+    <tr><td headers="2023  mn" class="gt_row gt_center gt_striped" style="color: #000000;">2023-09-01</td>
+<td headers="2023  price" class="gt_row gt_center gt_striped" style="color: #000000;">26,139.63</td>
+<td headers="2023  Hi.80" class="gt_row gt_center gt_striped" style="color: #000000;">39,502.43</td>
+<td headers="2023  Hi.95" class="gt_row gt_center gt_striped" style="color: #000000;">43,812.77</td>
+<td headers="2023  detect_last" class="gt_row gt_center gt_striped" style="color: #000000;">67.61%</td></tr>
+    <tr><td headers="2023  mn" class="gt_row gt_center" style="color: #000000;">2023-10-01</td>
+<td headers="2023  price" class="gt_row gt_center" style="color: #000000;">27,095.85</td>
+<td headers="2023  Hi.80" class="gt_row gt_center" style="color: #000000;">42,312.22</td>
+<td headers="2023  Hi.95" class="gt_row gt_center" style="color: #000000;">48,039.57</td>
+<td headers="2023  detect_last" class="gt_row gt_center" style="color: #000000;">77.29%</td></tr>
+    <tr><td headers="2023  mn" class="gt_row gt_center gt_striped" style="color: #000000;">2023-11-01</td>
+<td headers="2023  price" class="gt_row gt_center gt_striped" style="color: #000000;">34,063.67</td>
+<td headers="2023  Hi.80" class="gt_row gt_center gt_striped" style="color: #000000;">44,606.48</td>
+<td headers="2023  Hi.95" class="gt_row gt_center gt_striped" style="color: #000000;">51,523.88</td>
+<td headers="2023  detect_last" class="gt_row gt_center gt_striped" style="color: #000000;">51.26%</td></tr>
+    <tr class="gt_group_heading_row">
+      <th colspan="5" class="gt_group_heading" style="background-color: #BEBEBE; font-weight: bold;" scope="colgroup" id="2024">2024</th>
+    </tr>
+    <tr class="gt_row_group_first"><td headers="NA  mn" class="gt_row gt_center" style="color: #000000;">2023-12-01</td>
+<td headers="NA  price" class="gt_row gt_center" style="color: #000000;">39,809.14</td>
+<td headers="NA  Hi.80" class="gt_row gt_center" style="color: #000000;">46,571.69</td>
+<td headers="NA  Hi.95" class="gt_row gt_center" style="color: #000000;">54,520.91</td>
+<td headers="NA  detect_last" class="gt_row gt_center" style="color: #000000;">36.96%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center gt_striped" style="color: #000000;">2024-01-01</td>
+<td headers="NA  price" class="gt_row gt_center gt_striped" style="color: #000000;">43,573.33</td>
+<td headers="NA  Hi.80" class="gt_row gt_center gt_striped" style="color: #000000;">48,311.87</td>
+<td headers="NA  Hi.95" class="gt_row gt_center gt_striped" style="color: #000000;">57,179.33</td>
+<td headers="NA  detect_last" class="gt_row gt_center gt_striped" style="color: #000000;">31.23%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center" style="color: #000000;">2024-02-01</td>
+<td headers="NA  price" class="gt_row gt_center" style="color: #000000;">43,895.77</td>
+<td headers="NA  Hi.80" class="gt_row gt_center" style="color: #000000;">49,888.38</td>
+<td headers="NA  Hi.95" class="gt_row gt_center" style="color: #000000;">59,589.36</td>
+<td headers="NA  detect_last" class="gt_row gt_center" style="color: #000000;">35.75%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center gt_striped" style="color: #000000;">2024-03-01</td>
+<td headers="NA  price" class="gt_row gt_center gt_striped" style="color: #000000;">61,130.86</td>
+<td headers="NA  Hi.80" class="gt_row gt_center gt_striped" style="color: #000000;">51,339.76</td>
+<td headers="NA  Hi.95" class="gt_row gt_center gt_striped" style="color: #000000;">61,808.70</td>
+<td headers="NA  detect_last" class="gt_row gt_center gt_striped" style="color: #000000;">1.11%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center" style="color: #000000;">2024-04-01</td>
+<td headers="NA  price" class="gt_row gt_center" style="color: #000000;">67,822.90</td>
+<td headers="NA  Hi.80" class="gt_row gt_center" style="color: #000000;">52,691.68</td>
+<td headers="NA  Hi.95" class="gt_row gt_center" style="color: #000000;">63,876.17</td>
+<td headers="NA  detect_last" class="gt_row gt_center" style="color: #000000;">−5.82%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center gt_striped" style="color: #000000;">2024-05-01</td>
+<td headers="NA  price" class="gt_row gt_center gt_striped" style="color: #000000;">63,098.32</td>
+<td headers="NA  Hi.80" class="gt_row gt_center gt_striped" style="color: #000000;">53,962.15</td>
+<td headers="NA  Hi.95" class="gt_row gt_center gt_striped" style="color: #000000;">65,819.14</td>
+<td headers="NA  detect_last" class="gt_row gt_center gt_striped" style="color: #000000;">4.31%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center" style="color: #000000;">2024-06-01</td>
+<td headers="NA  price" class="gt_row gt_center" style="color: #000000;">68,511.82</td>
+<td headers="NA  Hi.80" class="gt_row gt_center" style="color: #000000;">55,164.32</td>
+<td headers="NA  Hi.95" class="gt_row gt_center" style="color: #000000;">67,657.68</td>
+<td headers="NA  detect_last" class="gt_row gt_center" style="color: #000000;">−1.25%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center gt_striped" style="color: #000000;">2024-07-01</td>
+<td headers="NA  price" class="gt_row gt_center gt_striped" style="color: #000000;">61,242.21</td>
+<td headers="NA  Hi.80" class="gt_row gt_center gt_striped" style="color: #000000;">56,308.15</td>
+<td headers="NA  Hi.95" class="gt_row gt_center gt_striped" style="color: #000000;">69,407.02</td>
+<td headers="NA  detect_last" class="gt_row gt_center gt_striped" style="color: #000000;">13.33%</td></tr>
+    <tr><td headers="NA  mn" class="gt_row gt_center" style="color: #000000;">2024-08-01</td>
+<td headers="NA  price" class="gt_row gt_center" style="color: #000000;">63,716.27</td>
+<td headers="NA  Hi.80" class="gt_row gt_center" style="color: #000000;">57,401.39</td>
+<td headers="NA  Hi.95" class="gt_row gt_center" style="color: #000000;">71,078.98</td>
+<td headers="NA  detect_last" class="gt_row gt_center" style="color: #000000;">11.56%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<div id="next-13-months" class="section level3">
+<h3>Next 13 Months</h3>
+<div id="htmlwidget-dbad6bfb35c16edf2c13" style="width:900px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dbad6bfb35c16edf2c13">{"x":{"data":[{"x":[1514764800,1517443200,1519862400,1522540800,1525132800,1527811200,1530403200,1533081600,1535760000,1538352000,1541030400,1543622400,1546300800,1548979200,1551398400,1554076800,1556668800,1559347200,1561939200,1564617600,1567296000,1569888000,1572566400,1575158400,1577836800,1580515200,1583020800,1585699200,1588291200,1590969600,1593561600,1596240000,1598918400,1601510400,1604188800,1606780800,1609459200,1612137600,1614556800,1617235200,1619827200,1622505600,1625097600,1627776000,1630454400,1633046400,1635724800,1638316800,1640995200,1643673600,1646092800,1648771200,1651363200,1654041600,1656633600,1659312000,1661990400,1664582400,1667260800,1669852800,1672531200,1675209600,1677628800,1680307200,1682899200,1685577600,1688169600,1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400,1725148800,1727740800,1730419200,1733011200,1735689600,1738368000,1740787200,1743465600,1746057600,1748736000,1751328000,1754006400],"y":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,69831.499574203801,73458.553817830063,76231.374087571181,78507.362068601622,80468.322865826703,82212.997595828347,83799.18649694309,85263.290199469455,86629.732381694819,87915.772328878564,89134.123147834864,90294.4654852198],"text":["mn: 2018-01-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-02-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-03-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-04-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-05-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-06-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-07-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-08-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-09-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-10-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-11-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2018-12-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-01-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-02-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-03-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-04-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-05-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-06-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-07-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-08-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-09-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-10-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-11-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2019-12-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-01-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-02-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-03-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-04-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-05-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-06-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-07-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-08-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-09-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-10-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-11-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2020-12-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-01-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-02-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-03-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-04-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-05-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-06-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-07-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-08-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-09-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-10-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-11-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2021-12-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-01-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-02-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-03-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-04-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-05-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-06-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-07-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-08-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-09-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-10-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-11-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2022-12-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-01-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-02-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-03-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-04-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-05-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-06-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-07-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-08-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-09-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-10-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-11-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2023-12-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-01-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-02-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-03-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-04-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-05-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-06-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-07-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-08-01<br />price:         NA<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-09-01<br />price:  69831.500<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-10-01<br />price:  73458.554<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-11-01<br />price:  76231.374<br />cat: Hi.80<br />cat: Hi.80","mn: 2024-12-01<br />price:  78507.362<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-01-01<br />price:  80468.323<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-02-01<br />price:  82212.998<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-03-01<br />price:  83799.186<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-04-01<br />price:  85263.290<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-05-01<br />price:  86629.732<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-06-01<br />price:  87915.772<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-07-01<br />price:  89134.123<br />cat: Hi.80<br />cat: Hi.80","mn: 2025-08-01<br />price:  90294.465<br />cat: Hi.80<br />cat: Hi.80"],"type":"scatter","mode":"lines","line":{"width":2.6456692913385824,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"(Hi.80,1)","legendgroup":"(Hi.80,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1514764800,1517443200,1519862400,1522540800,1525132800,1527811200,1530403200,1533081600,1535760000,1538352000,1541030400,1543622400,1546300800,1548979200,1551398400,1554076800,1556668800,1559347200,1561939200,1564617600,1567296000,1569888000,1572566400,1575158400,1577836800,1580515200,1583020800,1585699200,1588291200,1590969600,1593561600,1596240000,1598918400,1601510400,1604188800,1606780800,1609459200,1612137600,1614556800,1617235200,1619827200,1622505600,1625097600,1627776000,1630454400,1633046400,1635724800,1638316800,1640995200,1643673600,1646092800,1648771200,1651363200,1654041600,1656633600,1659312000,1661990400,1664582400,1667260800,1669852800,1672531200,1675209600,1677628800,1680307200,1682899200,1685577600,1688169600,1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400,1725148800,1727740800,1730419200,1733011200,1735689600,1738368000,1740787200,1743465600,1746057600,1748736000,1751328000,1754006400],"y":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,72686.839105553037,78122.600013079413,82330.799452548817,85802.157436412454,88798.428402832229,91465.873483020041,93891.505452804879,96130.590432003097,98220.363466061739,100187.18602258826,102050.49111066898,103825.08108315637],"text":["mn: 2018-01-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-02-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-03-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-04-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-05-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-06-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-07-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-08-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-09-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-10-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-11-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2018-12-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-01-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-02-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-03-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-04-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-05-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-06-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-07-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-08-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-09-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-10-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-11-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2019-12-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-01-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-02-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-03-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-04-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-05-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-06-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-07-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-08-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-09-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-10-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-11-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2020-12-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-01-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-02-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-03-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-04-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-05-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-06-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-07-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-08-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-09-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-10-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-11-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2021-12-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-01-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-02-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-03-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-04-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-05-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-06-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-07-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-08-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-09-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-10-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-11-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2022-12-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-01-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-02-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-03-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-04-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-05-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-06-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-07-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-08-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-09-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-10-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-11-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2023-12-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-01-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-02-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-03-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-04-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-05-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-06-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-07-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-08-01<br />price:         NA<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-09-01<br />price:  72686.839<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-10-01<br />price:  78122.600<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-11-01<br />price:  82330.799<br />cat: Hi.95<br />cat: Hi.95","mn: 2024-12-01<br />price:  85802.157<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-01-01<br />price:  88798.428<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-02-01<br />price:  91465.873<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-03-01<br />price:  93891.505<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-04-01<br />price:  96130.590<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-05-01<br />price:  98220.363<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-06-01<br />price: 100187.186<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-07-01<br />price: 102050.491<br />cat: Hi.95<br />cat: Hi.95","mn: 2025-08-01<br />price: 103825.081<br />cat: Hi.95<br />cat: Hi.95"],"type":"scatter","mode":"lines","line":{"width":2.6456692913385824,"color":"rgba(183,159,0,1)","dash":"solid"},"hoveron":"points","name":"(Hi.95,1)","legendgroup":"(Hi.95,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1514764800,1517443200,1519862400,1522540800,1525132800,1527811200,1530403200,1533081600,1535760000,1538352000,1541030400,1543622400,1546300800,1548979200,1551398400,1554076800,1556668800,1559347200,1561939200,1564617600,1567296000,1569888000,1572566400,1575158400,1577836800,1580515200,1583020800,1585699200,1588291200,1590969600,1593561600,1596240000,1598918400,1601510400,1604188800,1606780800,1609459200,1612137600,1614556800,1617235200,1619827200,1622505600,1625097600,1627776000,1630454400,1633046400,1635724800,1638316800,1640995200,1643673600,1646092800,1648771200,1651363200,1654041600,1656633600,1659312000,1661990400,1664582400,1667260800,1669852800,1672531200,1675209600,1677628800,1680307200,1682899200,1685577600,1688169600,1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400,1725148800,1727740800,1730419200,1733011200,1735689600,1738368000,1740787200,1743465600,1746057600,1748736000,1751328000,1754006400],"y":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,59043.770033578978,55837.367837346988,53187.196514925898,50946.969121230992,48996.434989986556,47254.800348852907,45669.497842328958,44205.652584672047,42839.285756866986,41553.267780669441,40334.923367763811,39174.582898182387],"text":["mn: 2018-01-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-02-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-03-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-04-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-05-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-06-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-07-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-08-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-09-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-10-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-11-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2018-12-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-01-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-02-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-03-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-04-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-05-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-06-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-07-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-08-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-09-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-10-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-11-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2019-12-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-01-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-02-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-03-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-04-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-05-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-06-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-07-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-08-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-09-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-10-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-11-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2020-12-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-01-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-02-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-03-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-04-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-05-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-06-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-07-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-08-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-09-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-10-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-11-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2021-12-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-01-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-02-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-03-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-04-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-05-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-06-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-07-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-08-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-09-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-10-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-11-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2022-12-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-01-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-02-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-03-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-04-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-05-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-06-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-07-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-08-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-09-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-10-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-11-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2023-12-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-01-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-02-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-03-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-04-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-05-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-06-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-07-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-08-01<br />price:         NA<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-09-01<br />price:  59043.770<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-10-01<br />price:  55837.368<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-11-01<br />price:  53187.197<br />cat: Lo.80<br />cat: Lo.80","mn: 2024-12-01<br />price:  50946.969<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-01-01<br />price:  48996.435<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-02-01<br />price:  47254.800<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-03-01<br />price:  45669.498<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-04-01<br />price:  44205.653<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-05-01<br />price:  42839.286<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-06-01<br />price:  41553.268<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-07-01<br />price:  40334.923<br />cat: Lo.80<br />cat: Lo.80","mn: 2025-08-01<br />price:  39174.583<br />cat: Lo.80<br />cat: Lo.80"],"type":"scatter","mode":"lines","line":{"width":2.6456692913385824,"color":"rgba(0,186,56,1)","dash":"solid"},"hoveron":"points","name":"(Lo.80,1)","legendgroup":"(Lo.80,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1514764800,1517443200,1519862400,1522540800,1525132800,1527811200,1530403200,1533081600,1535760000,1538352000,1541030400,1543622400,1546300800,1548979200,1551398400,1554076800,1556668800,1559347200,1561939200,1564617600,1567296000,1569888000,1572566400,1575158400,1577836800,1580515200,1583020800,1585699200,1588291200,1590969600,1593561600,1596240000,1598918400,1601510400,1604188800,1606780800,1609459200,1612137600,1614556800,1617235200,1619827200,1622505600,1625097600,1627776000,1630454400,1633046400,1635724800,1638316800,1640995200,1643673600,1646092800,1648771200,1651363200,1654041600,1656633600,1659312000,1661990400,1664582400,1667260800,1669852800,1672531200,1675209600,1677628800,1680307200,1682899200,1685577600,1688169600,1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400,1725148800,1727740800,1730419200,1733011200,1735689600,1738368000,1740787200,1743465600,1746057600,1748736000,1751328000,1754006400],"y":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,56188.430502229749,51173.321642097639,47087.771149948268,43652.173753420167,40666.329452981023,38001.924461661212,35577.178886467169,33338.352352138405,31248.654672500059,29281.854086959742,27418.555404929699,25643.967300245822],"text":["mn: 2018-01-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-02-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-03-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-04-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-05-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-06-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-07-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-08-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-09-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-10-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-11-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2018-12-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-01-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-02-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-03-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-04-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-05-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-06-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-07-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-08-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-09-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-10-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-11-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2019-12-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-01-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-02-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-03-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-04-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-05-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-06-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-07-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-08-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-09-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-10-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-11-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2020-12-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-01-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-02-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-03-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-04-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-05-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-06-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-07-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-08-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-09-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-10-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-11-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2021-12-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-01-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-02-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-03-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-04-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-05-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-06-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-07-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-08-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-09-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-10-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-11-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2022-12-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-01-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-02-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-03-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-04-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-05-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-06-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-07-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-08-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-09-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-10-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-11-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2023-12-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-01-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-02-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-03-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-04-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-05-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-06-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-07-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-08-01<br />price:         NA<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-09-01<br />price:  56188.431<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-10-01<br />price:  51173.322<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-11-01<br />price:  47087.771<br />cat: Lo.95<br />cat: Lo.95","mn: 2024-12-01<br />price:  43652.174<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-01-01<br />price:  40666.329<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-02-01<br />price:  38001.924<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-03-01<br />price:  35577.179<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-04-01<br />price:  33338.352<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-05-01<br />price:  31248.655<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-06-01<br />price:  29281.854<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-07-01<br />price:  27418.555<br />cat: Lo.95<br />cat: Lo.95","mn: 2025-08-01<br />price:  25643.967<br />cat: Lo.95<br />cat: Lo.95"],"type":"scatter","mode":"lines","line":{"width":2.6456692913385824,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"(Lo.95,1)","legendgroup":"(Lo.95,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1514764800,1517443200,1519862400,1522540800,1525132800,1527811200,1530403200,1533081600,1535760000,1538352000,1541030400,1543622400,1546300800,1548979200,1551398400,1554076800,1556668800,1559347200,1561939200,1564617600,1567296000,1569888000,1572566400,1575158400,1577836800,1580515200,1583020800,1585699200,1588291200,1590969600,1593561600,1596240000,1598918400,1601510400,1604188800,1606780800,1609459200,1612137600,1614556800,1617235200,1619827200,1622505600,1625097600,1627776000,1630454400,1633046400,1635724800,1638316800,1640995200,1643673600,1646092800,1648771200,1651363200,1654041600,1656633600,1659312000,1661990400,1664582400,1667260800,1669852800,1672531200,1675209600,1677628800,1680307200,1682899200,1685577600,1688169600,1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400,1725148800,1727740800,1730419200,1733011200,1735689600,1738368000,1740787200,1743465600,1746057600,1748736000,1751328000,1754006400],"y":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,64437.634803891393,64647.960827588526,64709.285301248543,64727.165594916311,64732.378927906626,64733.898972340627,64734.342169636024,64734.471392070751,64734.509069280903,64734.520054774002,64734.523257799337,64734.524191701094],"text":["mn: 2018-01-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-02-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-03-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-04-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-05-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-06-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-07-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-08-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-09-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-10-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-11-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2018-12-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-01-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-02-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-03-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-04-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-05-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-06-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-07-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-08-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-09-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-10-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-11-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2019-12-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-01-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-02-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-03-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-04-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-05-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-06-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-07-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-08-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-09-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-10-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-11-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2020-12-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-01-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-02-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-03-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-04-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-05-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-06-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-07-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-08-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-09-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-10-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-11-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2021-12-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-01-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-02-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-03-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-04-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-05-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-06-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-07-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-08-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-09-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-10-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-11-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2022-12-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-01-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-02-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-03-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-04-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-05-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-06-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-07-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-08-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-09-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-10-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-11-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2023-12-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-01-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-02-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-03-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-04-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-05-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-06-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-07-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-08-01<br />price:         NA<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-09-01<br />price:  64437.635<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-10-01<br />price:  64647.961<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-11-01<br />price:  64709.285<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2024-12-01<br />price:  64727.166<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-01-01<br />price:  64732.379<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-02-01<br />price:  64733.899<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-03-01<br />price:  64734.342<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-04-01<br />price:  64734.471<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-05-01<br />price:  64734.509<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-06-01<br />price:  64734.520<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-07-01<br />price:  64734.523<br />cat: Point.Forecast<br />cat: Point.Forecast","mn: 2025-08-01<br />price:  64734.524<br />cat: Point.Forecast<br />cat: Point.Forecast"],"type":"scatter","mode":"lines","line":{"width":2.6456692913385824,"color":"rgba(97,156,255,1)","dash":"solid"},"hoveron":"points","name":"(Point.Forecast,1)","legendgroup":"(Point.Forecast,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1514764800,1517443200,1519862400,1522540800,1525132800,1527811200,1530403200,1533081600,1535760000,1538352000,1541030400,1543622400,1546300800,1548979200,1551398400,1554076800,1556668800,1559347200,1561939200,1564617600,1567296000,1569888000,1572566400,1575158400,1577836800,1580515200,1583020800,1585699200,1588291200,1590969600,1593561600,1596240000,1598918400,1601510400,1604188800,1606780800,1609459200,1612137600,1614556800,1617235200,1619827200,1622505600,1625097600,1627776000,1630454400,1633046400,1635724800,1638316800,1640995200,1643673600,1646092800,1648771200,1651363200,1654041600,1656633600,1659312000,1661990400,1664582400,1667260800,1669852800,1672531200,1675209600,1677628800,1680307200,1682899200,1685577600,1688169600,1690848000,1693526400,1696118400,1698796800,1701388800,1704067200,1706745600,1709251200,1711929600,1714521600,1717200000,1719792000,1722470400,1725148800,1727740800,1730419200,1733011200,1735689600,1738368000,1740787200,1743465600,1746057600,1748736000,1751328000,1754006400],"y":[15151.403162802419,9923.0597386853442,10150.098372395832,7690.2456705729164,8976.4167716733864,7490.8263183593754,6447.9667653729839,7238.8990045362907,6681.105305989583,6534.201975176411,6383.6846842447912,4028.6138640372983,3834.1325919858873,3568.0058846309266,3888.6078613281252,4542.5486246744795,5945.5458826864915,8150.0620442708332,10983.719285534275,10580.531344506049,10253.268684895833,8764.889475176411,8787.4974609375004,7509.6675749747983,7609.5169480846771,9335.4401367187493,8407.7476399739589,6560.752522786458,8387.9764994959678,9491.5949869791675,9273.5069934475814,10829.303427419354,11118.612499999999,10897.920929939517,13996.6478515625,18598.683215725807,30689.235572076614,37632.919652478449,52187.605729166666,58061.261979166666,54496.965977822583,37582.540625000001,34047.32415574597,39717.580582157258,47871.816015625001,49298.475302419356,62792.41888020833,53671.899571572583,45968.31842237903,39939.380657327587,39982.633072916666,43514.083854166667,36563.380670362902,29014.856380208334,20457.291393649193,23169.542023689515,20691.294791666667,19374.655808971773,19286.049902343751,16836.588174143144,17422.284211189515,22612.121161099138,23261.092187499999,28349.720507812501,28314.327557963708,26704.823372395833,29875.534085181451,29422.703061995966,26139.632682291667,27095.848034274193,34063.673632812497,39809.141255040326,43573.327620967742,43895.77239583333,61130.861718749999,67822.904817708331,63098.320690524197,68511.816666666666,61242.208039314515,63716.274576822914,null,null,null,null,null,null,null,null,null,null,null,null],"text":["mn: 2018-01-01<br />price:  15151.403<br />cat: price<br />cat: price","mn: 2018-02-01<br />price:   9923.060<br />cat: price<br />cat: price","mn: 2018-03-01<br />price:  10150.098<br />cat: price<br />cat: price","mn: 2018-04-01<br />price:   7690.246<br />cat: price<br />cat: price","mn: 2018-05-01<br />price:   8976.417<br />cat: price<br />cat: price","mn: 2018-06-01<br />price:   7490.826<br />cat: price<br />cat: price","mn: 2018-07-01<br />price:   6447.967<br />cat: price<br />cat: price","mn: 2018-08-01<br />price:   7238.899<br />cat: price<br />cat: price","mn: 2018-09-01<br />price:   6681.105<br />cat: price<br />cat: price","mn: 2018-10-01<br />price:   6534.202<br />cat: price<br />cat: price","mn: 2018-11-01<br />price:   6383.685<br />cat: price<br />cat: price","mn: 2018-12-01<br />price:   4028.614<br />cat: price<br />cat: price","mn: 2019-01-01<br />price:   3834.133<br />cat: price<br />cat: price","mn: 2019-02-01<br />price:   3568.006<br />cat: price<br />cat: price","mn: 2019-03-01<br />price:   3888.608<br />cat: price<br />cat: price","mn: 2019-04-01<br />price:   4542.549<br />cat: price<br />cat: price","mn: 2019-05-01<br />price:   5945.546<br />cat: price<br />cat: price","mn: 2019-06-01<br />price:   8150.062<br />cat: price<br />cat: price","mn: 2019-07-01<br />price:  10983.719<br />cat: price<br />cat: price","mn: 2019-08-01<br />price:  10580.531<br />cat: price<br />cat: price","mn: 2019-09-01<br />price:  10253.269<br />cat: price<br />cat: price","mn: 2019-10-01<br />price:   8764.889<br />cat: price<br />cat: price","mn: 2019-11-01<br />price:   8787.497<br />cat: price<br />cat: price","mn: 2019-12-01<br />price:   7509.668<br />cat: price<br />cat: price","mn: 2020-01-01<br />price:   7609.517<br />cat: price<br />cat: price","mn: 2020-02-01<br />price:   9335.440<br />cat: price<br />cat: price","mn: 2020-03-01<br />price:   8407.748<br />cat: price<br />cat: price","mn: 2020-04-01<br />price:   6560.753<br />cat: price<br />cat: price","mn: 2020-05-01<br />price:   8387.976<br />cat: price<br />cat: price","mn: 2020-06-01<br />price:   9491.595<br />cat: price<br />cat: price","mn: 2020-07-01<br />price:   9273.507<br />cat: price<br />cat: price","mn: 2020-08-01<br />price:  10829.303<br />cat: price<br />cat: price","mn: 2020-09-01<br />price:  11118.612<br />cat: price<br />cat: price","mn: 2020-10-01<br />price:  10897.921<br />cat: price<br />cat: price","mn: 2020-11-01<br />price:  13996.648<br />cat: price<br />cat: price","mn: 2020-12-01<br />price:  18598.683<br />cat: price<br />cat: price","mn: 2021-01-01<br />price:  30689.236<br />cat: price<br />cat: price","mn: 2021-02-01<br />price:  37632.920<br />cat: price<br />cat: price","mn: 2021-03-01<br />price:  52187.606<br />cat: price<br />cat: price","mn: 2021-04-01<br />price:  58061.262<br />cat: price<br />cat: price","mn: 2021-05-01<br />price:  54496.966<br />cat: price<br />cat: price","mn: 2021-06-01<br />price:  37582.541<br />cat: price<br />cat: price","mn: 2021-07-01<br />price:  34047.324<br />cat: price<br />cat: price","mn: 2021-08-01<br />price:  39717.581<br />cat: price<br />cat: price","mn: 2021-09-01<br />price:  47871.816<br />cat: price<br />cat: price","mn: 2021-10-01<br />price:  49298.475<br />cat: price<br />cat: price","mn: 2021-11-01<br />price:  62792.419<br />cat: price<br />cat: price","mn: 2021-12-01<br />price:  53671.900<br />cat: price<br />cat: price","mn: 2022-01-01<br />price:  45968.318<br />cat: price<br />cat: price","mn: 2022-02-01<br />price:  39939.381<br />cat: price<br />cat: price","mn: 2022-03-01<br />price:  39982.633<br />cat: price<br />cat: price","mn: 2022-04-01<br />price:  43514.084<br />cat: price<br />cat: price","mn: 2022-05-01<br />price:  36563.381<br />cat: price<br />cat: price","mn: 2022-06-01<br />price:  29014.856<br />cat: price<br />cat: price","mn: 2022-07-01<br />price:  20457.291<br />cat: price<br />cat: price","mn: 2022-08-01<br />price:  23169.542<br />cat: price<br />cat: price","mn: 2022-09-01<br />price:  20691.295<br />cat: price<br />cat: price","mn: 2022-10-01<br />price:  19374.656<br />cat: price<br />cat: price","mn: 2022-11-01<br />price:  19286.050<br />cat: price<br />cat: price","mn: 2022-12-01<br />price:  16836.588<br />cat: price<br />cat: price","mn: 2023-01-01<br />price:  17422.284<br />cat: price<br />cat: price","mn: 2023-02-01<br />price:  22612.121<br />cat: price<br />cat: price","mn: 2023-03-01<br />price:  23261.092<br />cat: price<br />cat: price","mn: 2023-04-01<br />price:  28349.721<br />cat: price<br />cat: price","mn: 2023-05-01<br />price:  28314.328<br />cat: price<br />cat: price","mn: 2023-06-01<br />price:  26704.823<br />cat: price<br />cat: price","mn: 2023-07-01<br />price:  29875.534<br />cat: price<br />cat: price","mn: 2023-08-01<br />price:  29422.703<br />cat: price<br />cat: price","mn: 2023-09-01<br />price:  26139.633<br />cat: price<br />cat: price","mn: 2023-10-01<br />price:  27095.848<br />cat: price<br />cat: price","mn: 2023-11-01<br />price:  34063.674<br />cat: price<br />cat: price","mn: 2023-12-01<br />price:  39809.141<br />cat: price<br />cat: price","mn: 2024-01-01<br />price:  43573.328<br />cat: price<br />cat: price","mn: 2024-02-01<br />price:  43895.772<br />cat: price<br />cat: price","mn: 2024-03-01<br />price:  61130.862<br />cat: price<br />cat: price","mn: 2024-04-01<br />price:  67822.905<br />cat: price<br />cat: price","mn: 2024-05-01<br />price:  63098.321<br />cat: price<br />cat: price","mn: 2024-06-01<br />price:  68511.817<br />cat: price<br />cat: price","mn: 2024-07-01<br />price:  61242.208<br />cat: price<br />cat: price","mn: 2024-08-01<br />price:  63716.275<br />cat: price<br />cat: price","mn: 2024-09-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2024-10-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2024-11-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2024-12-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-01-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-02-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-03-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-04-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-05-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-06-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-07-01<br />price:         NA<br />cat: price<br />cat: price","mn: 2025-08-01<br />price:         NA<br />cat: price<br />cat: price"],"type":"scatter","mode":"lines","line":{"width":2.6456692913385824,"color":"rgba(245,100,227,1)","dash":"solid"},"hoveron":"points","name":"(price,1)","legendgroup":"(price,1)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":42.774595267745951,"r":7.3059360730593621,"b":63.636363636363626,"l":50.809464508094635},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"<b> Forecast BTC For Year Next <\/b>","font":{"color":"rgba(165,42,42,1)","family":"","size":19.9252801992528},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1502802720,1765968480],"tickmode":"array","ticktext":["Feb-2018","Aug-2018","Feb-2019","Aug-2019","Feb-2020","Aug-2020","Feb-2021","Aug-2021","Feb-2022","Aug-2022","Feb-2023","Aug-2023","Feb-2024","Aug-2024","Feb-2025","Aug-2025"],"tickvals":[1517443200,1533081600,1548979200,1564617600,1580515200,1596240000,1612137600,1627776000,1643673600,1659312000,1675209600,1690848000,1706745600,1722470400,1738368000,1754006400],"categoryorder":"array","categoryarray":["Feb-2018","Aug-2018","Feb-2019","Aug-2019","Feb-2020","Aug-2020","Feb-2021","Aug-2021","Feb-2022","Aug-2022","Feb-2023","Aug-2023","Feb-2024","Aug-2024","Feb-2025","Aug-2025"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835198},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1444.8478752953461,108837.93484308265],"tickmode":"array","ticktext":["0","25000","50000","75000","100000"],"tickvals":[0,25000,50000,75000,100000],"categoryorder":"array","categoryarray":["0","25000","50000","75000","100000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":13.283520132835198},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176002,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"cat","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","width":900,"barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"271a544174897":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"271a544174897","visdat":{"271a544174897":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="next-13-chart" class="section level3">
+<h3>Next 13 Chart</h3>
+<div id="mzcyvtcdaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mzcyvtcdaj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mzcyvtcdaj thead, #mzcyvtcdaj tbody, #mzcyvtcdaj tfoot, #mzcyvtcdaj tr, #mzcyvtcdaj td, #mzcyvtcdaj th {
+  border-style: none;
+}
+
+#mzcyvtcdaj p {
+  margin: 0;
+  padding: 0;
+}
+
+#mzcyvtcdaj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mzcyvtcdaj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mzcyvtcdaj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mzcyvtcdaj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mzcyvtcdaj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mzcyvtcdaj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+}
+
+#mzcyvtcdaj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mzcyvtcdaj .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #004D80;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mzcyvtcdaj .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #004D80;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mzcyvtcdaj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mzcyvtcdaj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mzcyvtcdaj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mzcyvtcdaj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mzcyvtcdaj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mzcyvtcdaj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+  vertical-align: middle;
+}
+
+#mzcyvtcdaj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mzcyvtcdaj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mzcyvtcdaj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: dashed;
+  border-top-width: 1px;
+  border-top-color: #929292;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #929292;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #929292;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mzcyvtcdaj .gt_stub {
+  color: #333333;
+  background-color: #D5D5D5;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzcyvtcdaj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mzcyvtcdaj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mzcyvtcdaj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mzcyvtcdaj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzcyvtcdaj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #929292;
+}
+
+#mzcyvtcdaj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mzcyvtcdaj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+}
+
+#mzcyvtcdaj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #D5D5D5;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzcyvtcdaj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #929292;
+}
+
+#mzcyvtcdaj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #929292;
+}
+
+#mzcyvtcdaj .gt_striped {
+  background-color: #F4F4F4;
+}
+
+#mzcyvtcdaj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #929292;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #929292;
+}
+
+#mzcyvtcdaj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mzcyvtcdaj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzcyvtcdaj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mzcyvtcdaj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mzcyvtcdaj .gt_left {
+  text-align: left;
+}
+
+#mzcyvtcdaj .gt_center {
+  text-align: center;
+}
+
+#mzcyvtcdaj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mzcyvtcdaj .gt_font_normal {
+  font-weight: normal;
+}
+
+#mzcyvtcdaj .gt_font_bold {
+  font-weight: bold;
+}
+
+#mzcyvtcdaj .gt_font_italic {
+  font-style: italic;
+}
+
+#mzcyvtcdaj .gt_super {
+  font-size: 65%;
+}
+
+#mzcyvtcdaj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mzcyvtcdaj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mzcyvtcdaj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mzcyvtcdaj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mzcyvtcdaj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mzcyvtcdaj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mzcyvtcdaj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mzcyvtcdaj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mzcyvtcdaj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="background-color: #FDCB6E; font-weight: bold;">Forecast BTC Prices For Year</td>
+    </tr>
+    
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-weight: bold;" scope="col" id="MN">MN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" style="font-weight: bold;" scope="col" id="POINT.FORECAST">POINT.FORECAST</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="4" style="font-weight: bold;" scope="colgroup" id="Ranges">
+        <span class="gt_column_spanner">Ranges</span>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="LO.95">LO.95</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="HI.95">HI.95</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="HI.80">HI.80</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="font-weight: bold;" scope="col" id="LO.80">LO.80</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr class="gt_group_heading_row">
+      <th colspan="7" class="gt_group_heading" scope="colgroup" id="2024">2024</th>
+    </tr>
+    <tr class="gt_row_group_first"><th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="2024 stub_1_1 mn" class="gt_row gt_center" style="color: #000000; text-align: center;">September 2024</td>
+<td headers="2024 stub_1_1 Point.Forecast" class="gt_row gt_center" style="color: #000000; text-align: center;">64,437.63</td>
+<td headers="2024 stub_1_1 Lo.95" class="gt_row gt_center" style="color: #000000; text-align: center;">56,188.43</td>
+<td headers="2024 stub_1_1 Hi.95" class="gt_row gt_center" style="color: #000000; text-align: center;">72,686.84</td>
+<td headers="2024 stub_1_1 Hi.80" class="gt_row gt_center" style="color: #000000; text-align: center;">69,831.50</td>
+<td headers="2024 stub_1_1 Lo.80" class="gt_row gt_center" style="color: #000000; text-align: center;">59,043.77</td></tr>
+    <tr><th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="2024 stub_1_2 mn" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">October 2024</td>
+<td headers="2024 stub_1_2 Point.Forecast" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">64,647.96</td>
+<td headers="2024 stub_1_2 Lo.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">51,173.32</td>
+<td headers="2024 stub_1_2 Hi.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">78,122.60</td>
+<td headers="2024 stub_1_2 Hi.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">73,458.55</td>
+<td headers="2024 stub_1_2 Lo.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">55,837.37</td></tr>
+    <tr><th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="2024 stub_1_3 mn" class="gt_row gt_center" style="color: #000000; text-align: center;">November 2024</td>
+<td headers="2024 stub_1_3 Point.Forecast" class="gt_row gt_center" style="color: #000000; text-align: center;">64,709.29</td>
+<td headers="2024 stub_1_3 Lo.95" class="gt_row gt_center" style="color: #000000; text-align: center;">47,087.77</td>
+<td headers="2024 stub_1_3 Hi.95" class="gt_row gt_center" style="color: #000000; text-align: center;">82,330.80</td>
+<td headers="2024 stub_1_3 Hi.80" class="gt_row gt_center" style="color: #000000; text-align: center;">76,231.37</td>
+<td headers="2024 stub_1_3 Lo.80" class="gt_row gt_center" style="color: #000000; text-align: center;">53,187.20</td></tr>
+    <tr><th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="2024 stub_1_4 mn" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">December 2024</td>
+<td headers="2024 stub_1_4 Point.Forecast" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">64,727.17</td>
+<td headers="2024 stub_1_4 Lo.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">43,652.17</td>
+<td headers="2024 stub_1_4 Hi.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">85,802.16</td>
+<td headers="2024 stub_1_4 Hi.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">78,507.36</td>
+<td headers="2024 stub_1_4 Lo.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">50,946.97</td></tr>
+    <tr class="gt_group_heading_row">
+      <th colspan="7" class="gt_group_heading" scope="colgroup" id="2025">2025</th>
+    </tr>
+    <tr class="gt_row_group_first"><th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_5 mn" class="gt_row gt_center" style="color: #000000; text-align: center;">January 2025</td>
+<td headers="NA stub_1_5 Point.Forecast" class="gt_row gt_center" style="color: #000000; text-align: center;">64,732.38</td>
+<td headers="NA stub_1_5 Lo.95" class="gt_row gt_center" style="color: #000000; text-align: center;">40,666.33</td>
+<td headers="NA stub_1_5 Hi.95" class="gt_row gt_center" style="color: #000000; text-align: center;">88,798.43</td>
+<td headers="NA stub_1_5 Hi.80" class="gt_row gt_center" style="color: #000000; text-align: center;">80,468.32</td>
+<td headers="NA stub_1_5 Lo.80" class="gt_row gt_center" style="color: #000000; text-align: center;">48,996.43</td></tr>
+    <tr><th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_6 mn" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">February 2025</td>
+<td headers="NA stub_1_6 Point.Forecast" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">64,733.90</td>
+<td headers="NA stub_1_6 Lo.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">38,001.92</td>
+<td headers="NA stub_1_6 Hi.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">91,465.87</td>
+<td headers="NA stub_1_6 Hi.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">82,213.00</td>
+<td headers="NA stub_1_6 Lo.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">47,254.80</td></tr>
+    <tr><th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_7 mn" class="gt_row gt_center" style="color: #000000; text-align: center;">March 2025</td>
+<td headers="NA stub_1_7 Point.Forecast" class="gt_row gt_center" style="color: #000000; text-align: center;">64,734.34</td>
+<td headers="NA stub_1_7 Lo.95" class="gt_row gt_center" style="color: #000000; text-align: center;">35,577.18</td>
+<td headers="NA stub_1_7 Hi.95" class="gt_row gt_center" style="color: #000000; text-align: center;">93,891.51</td>
+<td headers="NA stub_1_7 Hi.80" class="gt_row gt_center" style="color: #000000; text-align: center;">83,799.19</td>
+<td headers="NA stub_1_7 Lo.80" class="gt_row gt_center" style="color: #000000; text-align: center;">45,669.50</td></tr>
+    <tr><th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_8 mn" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">April 2025</td>
+<td headers="NA stub_1_8 Point.Forecast" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">64,734.47</td>
+<td headers="NA stub_1_8 Lo.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">33,338.35</td>
+<td headers="NA stub_1_8 Hi.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">96,130.59</td>
+<td headers="NA stub_1_8 Hi.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">85,263.29</td>
+<td headers="NA stub_1_8 Lo.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">44,205.65</td></tr>
+    <tr><th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_9 mn" class="gt_row gt_center" style="color: #000000; text-align: center;">May 2025</td>
+<td headers="NA stub_1_9 Point.Forecast" class="gt_row gt_center" style="color: #000000; text-align: center;">64,734.51</td>
+<td headers="NA stub_1_9 Lo.95" class="gt_row gt_center" style="color: #000000; text-align: center;">31,248.65</td>
+<td headers="NA stub_1_9 Hi.95" class="gt_row gt_center" style="color: #000000; text-align: center;">98,220.36</td>
+<td headers="NA stub_1_9 Hi.80" class="gt_row gt_center" style="color: #000000; text-align: center;">86,629.73</td>
+<td headers="NA stub_1_9 Lo.80" class="gt_row gt_center" style="color: #000000; text-align: center;">42,839.29</td></tr>
+    <tr><th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_10 mn" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">June 2025</td>
+<td headers="NA stub_1_10 Point.Forecast" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">64,734.52</td>
+<td headers="NA stub_1_10 Lo.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">29,281.85</td>
+<td headers="NA stub_1_10 Hi.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">100,187.19</td>
+<td headers="NA stub_1_10 Hi.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">87,915.77</td>
+<td headers="NA stub_1_10 Lo.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">41,553.27</td></tr>
+    <tr><th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_11 mn" class="gt_row gt_center" style="color: #000000; text-align: center;">July 2025</td>
+<td headers="NA stub_1_11 Point.Forecast" class="gt_row gt_center" style="color: #000000; text-align: center;">64,734.52</td>
+<td headers="NA stub_1_11 Lo.95" class="gt_row gt_center" style="color: #000000; text-align: center;">27,418.56</td>
+<td headers="NA stub_1_11 Hi.95" class="gt_row gt_center" style="color: #000000; text-align: center;">102,050.49</td>
+<td headers="NA stub_1_11 Hi.80" class="gt_row gt_center" style="color: #000000; text-align: center;">89,134.12</td>
+<td headers="NA stub_1_11 Lo.80" class="gt_row gt_center" style="color: #000000; text-align: center;">40,334.92</td></tr>
+    <tr><th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub"></th>
+<td headers="NA stub_1_12 mn" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">August 2025</td>
+<td headers="NA stub_1_12 Point.Forecast" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">64,734.52</td>
+<td headers="NA stub_1_12 Lo.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">25,643.97</td>
+<td headers="NA stub_1_12 Hi.95" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">103,825.08</td>
+<td headers="NA stub_1_12 Hi.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">90,294.47</td>
+<td headers="NA stub_1_12 Lo.80" class="gt_row gt_center gt_striped" style="color: #000000; text-align: center;">39,174.58</td></tr>
+    <tr><th id="grand_summary_stub_1" scope="row" class="gt_row gt_left gt_stub gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" style="background-color: #000000; color: #FFFFFF;">AVG</th>
+<td headers="grand_summary_stub_1 mn" class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" style="background-color: #000000; color: #FFFFFF; font-weight: bold;">—</td>
+<td headers="grand_summary_stub_1 Point.Forecast" class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" style="background-color: #000000; color: #FFFFFF; font-weight: bold;">64699.6</td>
+<td headers="grand_summary_stub_1 Lo.95" class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" style="background-color: #000000; color: #FFFFFF; font-weight: bold;">38273.21</td>
+<td headers="grand_summary_stub_1 Hi.95" class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" style="background-color: #000000; color: #FFFFFF; font-weight: bold;">91125.99</td>
+<td headers="grand_summary_stub_1 Hi.80" class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" style="background-color: #000000; color: #FFFFFF; font-weight: bold;">81978.89</td>
+<td headers="grand_summary_stub_1 Lo.80" class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row gt_last_summary_row" style="background-color: #000000; color: #FFFFFF; font-weight: bold;">47420.31</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
