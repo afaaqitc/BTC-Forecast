@@ -149,9 +149,6 @@ detect_last_gt
 
 ### Next Year Chart
 
-
-Removes Prices Less Than 10K To Focus Ranges Betweek 25K - 75K 
-
 ```{r}
 ggplotly( mn_add_chart,width = 900)
 ```
