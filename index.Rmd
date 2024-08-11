@@ -63,8 +63,10 @@ cbind(rownames_to_column(data.frame(mnf))
 
 
 detect_last_gt<-
-detect_last %>% gt() %>% cols_label_with(columns =c(1:5) ,fn = toupper) %>% cols_align(align = "center") %>% fmt_number(columns = c(2:5),decimals = 2) %>% opt_stylize(style = 3)  %>% tab_row_group(rows = mn < "2023-12-01",label = "2023",group =  "1") %>% tab_row_group(rows =mn>"2023-12-31",label = "2024",group =  "2")%>% tab_style(style = list(cell_text(color="black")),locations = cells_body()) %>% tab_style(style = list(cell_fill(color="gray"),cell_text(weight = "bold")),locations = cells_row_groups()) %>% tab_style(style =list(cell_text(weight = "bold")) ,locations =cells_column_labels()) %>% row_group_order(groups =c("2023","2024"))
-
+detect_last %>% gt() %>% fmt_number(columns = c(2:5),decimals = 2) %>% fmt_date(columns = 1,date_style = "yMMM") %>% tab_row_group(label ="2023" ,rows =mn<"2023-12-31" ,id = "2023",group = "2023")%>% tab_row_group(label ="2024" ,rows =mn>="2024-1-1" ,id = "2024",group = "2024") %>% cols_label(mn="Date") %>% cols_label_with(columns = everything(),fn = toupper) %>% summary_rows(groups = everything(),columns = c(2:5),fns = list(AVG=~mean(.)),formatter = fmt_number,decimals=1) %>% row_group_order(groups = c("2023","2024")) %>% tab_header(title = "Forecast Last Year Data") %>% opt_stylize(style = 3) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_title()) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_summary()) %>% tab_style(style =list(cell_fill(color="black"),cell_text(color="white",weight = "bold")) ,locations = cells_stub_summary())%>% tab_style(style =list(cell_fill(color="#ced6e0"),cell_text(color="black",weight = "bold")) ,locations = cells_group()) %>% tab_style(style =list(cell_text(color="black",weight = "bold",align = "center")) ,locations = cells_body())   
+  
+  
+  
 detect_last_chart<-
 detect_last %>% mutate(mn=as.POSIXct(mn)) %>% select(mn,price,Point.Forecast,Hi,Low)%>% 
 pivot_longer(!mn,names_to = "cat",values_to = "price") %>% 
@@ -88,28 +90,12 @@ autoplot(mrf)
 
 nextf<-data.frame(mn=seq(as.Date("2024-09-1"),by="month",len=12))
 
-  mn_add_gt<-
-  cbind(rownames_to_column(data.frame(mrf)),nextf) %>% 
-      select(mn,Point.Forecast,Lo.95,Hi.95,Hi.80,Lo.80) %>% mutate(low=(Lo.80+Lo.95)/2,high=(Hi.80+Hi.95)/2) %>% rename(Date=mn)%>%select(Date,Point.Forecast,low,high) %>% gt() %>% 
-  tab_header("Forecast BTC Prices For Year") %>% 
-  cols_label_with(columns = everything(),fn = toupper) %>% 
-  cols_align(align = "center") %>% tab_spanner(label = "Ranges",columns = c(3:4)) %>%
-  opt_align_table_header(align = "center") %>% 
-  opt_stylize(style = 3,color = "blue") %>%
-  tab_row_group(rows = Date<="2024-12-01",label = "2024",others_label = "2025") %>%
-  tab_style(style = list(cell_text(color="black",align = "center")),
-  locations = cells_body()) %>% tab_style(style =list(cell_text(weight = "bold")) ,
-  locations = cells_column_labels()) %>% 
-  tab_style(style = list(cell_text(weight = "bold")),
-  locations = cells_column_spanners()) %>% tab_style(style =list(cell_fill("#fdcb6e"),
-  cell_text(weight = "bold")) ,locations = cells_title()) %>%
-  grand_summary_rows(columns = c(2:4),fns = list( AVG=~mean(.)) ) %>%
-  fmt_number(columns = c(2:4),decimals = 2) %>% 
-  fmt_date(columns = 1,date_style = "yMMMM") %>% 
-  tab_style(style =list(cell_fill("black"),cell_text(color="white",weight = "bold")) 
-  ,locations = cells_grand_summary()) %>% 
-  tab_style(style =list(cell_fill(color="black"),cell_text(color="white")) ,locations = cells_stub_grand_summary()) 
+mn_add_gt<-
+cbind(rownames_to_column(data.frame(mrf)),nextf) %>% 
+select(mn,Point.Forecast,Lo.95,Hi.95,Hi.80,Lo.80) %>% mutate(low=(Lo.80+Lo.95)/2,high=(Hi.80+Hi.95)/2) %>% rename(Date=mn)%>%select(Date,Point.Forecast,low,high)%>% gt() %>% fmt_number(columns = c(2:4),decimals = 2) %>% fmt_date(columns = 1,date_style = "yMMM") %>% tab_row_group(label ="2023" ,rows =Date<"2024-12-31" ,id = "2024",group = "2024")%>% tab_row_group(label ="2025" ,rows =Date>="2025-1-1" ,id = "2025",group = "2025")  %>% cols_label_with(columns = everything(),fn = toupper) %>% summary_rows(groups = everything(),columns = c(2:4),fns = list(AVG=~mean(.)),formatter = fmt_number,decimals=1) %>% row_group_order(groups = c("2024","2025")) %>% tab_header(title = "Forecast Next Year") %>% opt_stylize(style = 3) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_title()) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_summary()) %>% tab_style(style =list(cell_fill(color="black"),cell_text(color="white",weight = "bold")) ,locations = cells_stub_summary())%>% tab_style(style =list(cell_fill(color="#ced6e0"),cell_text(color="black",weight = "bold")) ,locations = cells_group()) %>% tab_style(style =list(cell_text(color="black",weight = "bold",align = "center")) ,locations = cells_body())   
+  
 
+  
 
 mn_add_chart<-
 cbind(rownames_to_column(data.frame(mrf)),nextf) %>% 
