@@ -38,75 +38,84 @@ library(tseries)
 library(forecast)
 
 
-getSymbols("BTC-USD",from="2015-01-01")
 
-btc<-rownames_to_column(data.frame(`BTC-USD`))
+btc<-read.csv("~/Desktop/Statics/BTC-USD.csv")
 
 
 btc<-
-btc %>% select(rowname,BTC.USD.Adjusted) %>% 
-rename(date=rowname,price=BTC.USD.Adjusted) %>% mutate(date=ymd(date))%>% 
-mutate(mn=round_date(date,"month"),wk=round_date(date,"week")) 
+btc%>% select(Date,Close) %>% 
+rename(price=Close) %>% mutate(Date=as.Date(Date))%>% select(Date,price) %>% 
+mutate(mn=round_date(Date,"month"),wk=round_date(Date,"week")) 
 
+btc<-btc %>% filter(Date>"2021-01-01")
 #--------------------------------------------------------------------------
 mn<-btc %>% group_by(mn) %>% summarize(price=mean(price))
 
 #Last
 
-mnts<-ts(mn$price,start =c(2015,1) ,end =c(2023,7) ,frequency = 12)
+mnts<-ts(mn$price,start =c(2021,1) ,end =c(2023,12) ,frequency = 12)
 
-
-autoplot(decompose(diff(mnts)))
-
-
+ 
+mets<-ets(mnts)
 mna<-auto.arima(mnts)
 
-mnf<-forecast(mna,h = 13)
-
-autoplot(mnf)
-
+mnf<-forecast(mna,h = 8)
+mff<-forecast(mets,8)
+ 
 detect_last<-
 cbind(rownames_to_column(data.frame(mnf))
-,mn[c(104:116),] ) %>% select(mn,Point.Forecast,price,Hi.80,Lo.80,Lo.95,Hi.95) %>% mutate(Hi=(Hi.80+Hi.95)/2,Low=(Lo.80+Lo.95)/2) %>% select(mn,price,Point.Forecast,Hi,Low)
+,mn[c(37:44),] ) %>% select(mn,Point.Forecast,price,Hi.80,Lo.80,Lo.95,Hi.95) %>% mutate(Hi=(Hi.80+Hi.95)/2,Low=(Lo.80+Lo.95)/2) %>% select(mn,price,Point.Forecast,Hi,Low)
 
 
 detect_last_gt<-
-detect_last %>% gt() %>% fmt_number(columns = c(2:5),decimals = 2) %>% fmt_date(columns = 1,date_style = "yMMM") %>% tab_row_group(label ="2023" ,rows =mn<"2023-12-31" ,id = "2023",group = "2023")%>% tab_row_group(label ="2024" ,rows =mn>="2024-1-1" ,id = "2024",group = "2024") %>% cols_label(mn="Date") %>% cols_label_with(columns = everything(),fn = toupper) %>% summary_rows(groups = everything(),columns = c(2:5),fns = list(AVG=~mean(.)),formatter = fmt_number,decimals=1) %>% row_group_order(groups = c("2023","2024")) %>% tab_header(title = "Forecast Last Year Data") %>% opt_stylize(style = 3) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_title()) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_summary()) %>% tab_style(style =list(cell_fill(color="black"),cell_text(color="white",weight = "bold")) ,locations = cells_stub_summary())%>% tab_style(style =list(cell_fill(color="#ced6e0"),cell_text(color="black",weight = "bold")) ,locations = cells_group()) %>% tab_style(style =list(cell_text(color="black",weight = "bold",align = "center")) ,locations = cells_body())   
+detect_last %>% select(mn,price,Hi)%>% gt() %>% 
+fmt_number(columns = c(2:3),decimals = 2) %>% 
+fmt_date(columns = 1,date_style = "yMMM") %>% 
+cols_label(mn="Date") %>% 
+cols_label_with(columns = everything(),fn = toupper) %>% 
+grand_summary_rows(columns = c(2:3),fns = list(AVG=~mean(.)),formatter = fmt_number,decimals=1) %>% tab_header(title = "Forecast Last Year Data") %>% opt_stylize(style = 3) %>%
+tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_title()) %>% 
+tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_grand_summary()) %>% 
+tab_style(style =list(cell_fill(color="black"),cell_text(color="white",weight = "bold")) ,locations = cells_stub_grand_summary())%>% 
+tab_style(style =list(cell_text(color="black",weight = "bold",align = "center")) ,locations = cells_body())   
   
   
   
 detect_last_chart<-
-detect_last %>% mutate(mn=as.POSIXct(mn)) %>% select(mn,price,Point.Forecast,Hi,Low)%>% 
+detect_last %>% mutate(mn=as.POSIXct(mn)) %>% 
+select(mn,price,Point.Forecast,Hi,Low)%>%  
 pivot_longer(!mn,names_to = "cat",values_to = "price") %>% 
-ggplot(aes(x=mn,y = price,color=cat,group=cat))+geom_line()+
+filter(cat %in% c("price","Hi"))%>%  
+ggplot(aes(x=mn,y = price,color=cat,group=cat))+geom_line(size=0.9)+
 scale_x_datetime(date_breaks ="month" ,date_labels = "%b-%Y")+theme_bw()+
 labs(x="",y="")+
-scale_y_continuous(breaks = c(5000,15000,25000,35000,45000,55000,65000,75000))+
+scale_y_continuous(breaks = c(25000,35000,45000,55000,65000,75000,85000,95000,105000))+
 theme(axis.text.x = element_text(face = "bold",size=10,color="black",angle = 90),
 axis.text.y = element_text(face = "bold",size=10,color="black"))
 
 
 #Real
 
-mrts<-ts(mn$price,start =c(2015,1) ,end =c(2024,8) ,frequency = 12)
+mrts<-ts(mn$price,start =c(2021,1) ,end =c(2024,8) ,frequency = 12)
 
 mra<-auto.arima(mrts)
 
-mrf<-forecast(mra,h = 12)
+mrf<-forecast(mra,h = 8)
 
-autoplot(mrf)
+mfets<-ets(mrts)
+mr_ets<-forecast(mfets,h=8)
 
-nextf<-data.frame(mn=seq(as.Date("2024-09-1"),by="month",len=12))
+nextf<-data.frame(mn=seq(as.Date("2024-09-1"),by="month",len=8))
 
 mn_add_gt<-
-cbind(rownames_to_column(data.frame(mrf)),nextf) %>% 
-select(mn,Point.Forecast,Lo.95,Hi.95,Hi.80,Lo.80) %>% mutate(low=(Lo.80+Lo.95)/2,high=(Hi.80+Hi.95)/2) %>% rename(Date=mn)%>%select(Date,Point.Forecast,low,high)%>% gt() %>% fmt_number(columns = c(2:4),decimals = 2) %>% fmt_date(columns = 1,date_style = "yMMM") %>% tab_row_group(label ="2023" ,rows =Date<"2024-12-31" ,id = "2024",group = "2024")%>% tab_row_group(label ="2025" ,rows =Date>="2025-1-1" ,id = "2025",group = "2025")  %>% cols_label_with(columns = everything(),fn = toupper) %>% summary_rows(groups = everything(),columns = c(2:4),fns = list(AVG=~mean(.)),formatter = fmt_number,decimals=1) %>% row_group_order(groups = c("2024","2025")) %>% tab_header(title = "Forecast Next Year") %>% opt_stylize(style = 3) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_title()) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_summary()) %>% tab_style(style =list(cell_fill(color="black"),cell_text(color="white",weight = "bold")) ,locations = cells_stub_summary())%>% tab_style(style =list(cell_fill(color="#ced6e0"),cell_text(color="black",weight = "bold")) ,locations = cells_group()) %>% tab_style(style =list(cell_text(color="black",weight = "bold",align = "center")) ,locations = cells_body())   
+cbind(rownames_to_column(data.frame(mr_ets)),nextf) %>% 
+select(mn,Point.Forecast,Lo.95,Hi.95,Hi.80,Lo.80) %>% mutate(low=(Lo.80+Lo.95)/2,high=(Hi.80+Hi.95)/2) %>% rename(Date=mn)%>%select(Date,Point.Forecast,low,high)%>% gt() %>% fmt_number(columns = c(2:4),decimals = 2) %>% fmt_date(columns = 1,date_style = "yMMM") %>% tab_row_group(label ="2024" ,rows =Date<"2024-12-31" ,id = "2024",group = "2024")%>% tab_row_group(label ="2025" ,rows =Date>="2025-1-1" ,id = "2025",group = "2025")  %>% cols_label_with(columns = everything(),fn = toupper) %>% summary_rows(groups = everything(),columns = c(2:4),fns = list(AVG=~mean(.)),formatter = fmt_number,decimals=1) %>% row_group_order(groups = c("2024","2025")) %>% tab_header(title = "Forecast Next Year") %>% opt_stylize(style = 3) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_title()) %>% tab_style(style =list(cell_fill(color="#eccc68"),cell_text(color="black",weight = "bold")) ,locations = cells_summary()) %>% tab_style(style =list(cell_fill(color="black"),cell_text(color="white",weight = "bold")) ,locations = cells_stub_summary())%>% tab_style(style =list(cell_fill(color="#ced6e0"),cell_text(color="black",weight = "bold")) ,locations = cells_group()) %>% tab_style(style =list(cell_text(color="black",weight = "bold",align = "center")) ,locations = cells_body())   
   
 
   
 
 mn_add_chart<-
-cbind(rownames_to_column(data.frame(mrf)),nextf) %>% 
+cbind(rownames_to_column(data.frame(mr_ets)),nextf) %>% 
 select(mn,Point.Forecast,Lo.95,Hi.95,Hi.80,Lo.80) %>% mutate(low=(Lo.80+Lo.95)/2,high=(Hi.80+Hi.95)/2) %>% rename(Date=mn)%>%select(Date,Point.Forecast,low,high)%>%
 pivot_longer(!Date,names_to ="cat" ,values_to = "price") %>% 
 mutate(mn=as.POSIXct(Date))%>% filter(Date>"2017-12-31") %>% 
