@@ -167,9 +167,9 @@ mn_add_gt
 
 ### Other Models:
 
-[S&P500 Model:](https://afaaqitc.github.io/SP500/#Last_Year_Table)
+[S&P500 Model:](https://afaaqitc.github.io/SP500/#Last_Year_Table){target="_blank"}
 
-[Oil-CL=F Model:](https://afaaqitc.github.io/OIL-Forecast/#Detect_Forecast_Model_Fore_Last_8_Months)
+[Oil-CL=F Model:](https://afaaqitc.github.io/OIL-Forecast/#Detect_Forecast_Model_Fore_Last_8_Months){target="_blank"}
  
  
  
